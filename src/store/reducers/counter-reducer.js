@@ -2,7 +2,8 @@ import { COUNTER_DECREMENT, COUNTER_INCREMENT, COUNTER_RESET } from '../actions/
 
 const initialState = {
     count: 0,
-    message: 'Ceci est un exemple'
+    demo: 'Ceci est un exemple',
+    message: 'Le compteur est initialisé'
 };
 
 // Fonction "Reducer" qui sera déclanché lors des actions
@@ -14,17 +15,20 @@ export const counterReducer = (state = initialState, action) => {
         case COUNTER_INCREMENT:
             return {
                 ...state, // Permet d'evité la perte de valeur
-                count: state.count + action.payload
+                count: state.count + action.payload,
+                message: `Le compteur est incrementé de ${action.payload}`
             };
         case COUNTER_DECREMENT:
             return {
                 ...state,
-                count: state.count - action.payload
+                count: state.count - action.payload,
+                message: `Le compteur est décrementé de ${action.payload}`
             };
         case COUNTER_RESET:
             return {
                 ...state,
-                count: 0
+                count: 0,
+                message: 'Le compteur a été remis à zéro :o'
             };
             // Alternative: Remise a la valeur du state initial
             return { ...initialState };
