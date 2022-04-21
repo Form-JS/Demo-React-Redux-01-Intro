@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-const ButtonAction = ({ step, direction }) => {
+const ButtonAction = ({ step, direction, onClick }) => {
 
     return (
-        <button>
+        <button onClick={onClick}>
             {direction === 'down' ? <>&#9660;</> : <>&#9650;</>}
             {' '}
             {step}
@@ -13,11 +13,13 @@ const ButtonAction = ({ step, direction }) => {
 
 ButtonAction.propTypes = {
     step: PropTypes.number.isRequired,
-    direction: PropTypes.oneOf(['up', 'down'])
+    direction: PropTypes.oneOf(['up', 'down']),
+    onClick: PropTypes.func
 };
 
 ButtonAction.defaultProps = {
-    direction: 'up'
+    direction: 'up',
+    onClick: () => { }
 };
 
 export default ButtonAction;
