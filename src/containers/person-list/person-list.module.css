@@ -1,0 +1,22 @@
+.listItem>p {
+    position: relative;
+    width: min-content;
+    white-space: nowrap;
+    margin: 0 auto;
+    height: 20px;
+}
+
+.listItem>p>span {
+    display: none;
+    position: absolute;
+    right: -10px;
+    top: 0;
+
+    user-select: none;
+    transform: translateX(100%);
+}
+
+.listItem:hover>p>span {
+    display: inline;
+    cursor: grabbing;
+}
