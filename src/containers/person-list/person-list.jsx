@@ -1,25 +1,21 @@
+import { useSelector } from 'react-redux';
 import { AutoSizer, List } from 'react-virtualized';
 
-// FIXME Remove this and replace by store data
-const people = [
-    { id: '12542', firstname: 'Zaza', lastname: 'Vanderquack' },
-    { id: '51235', firstname: 'Della', lastname: 'Duck' },
-    { id: '51535', firstname: 'Balthazar', lastname: 'Picsou' },
-    { id: '42542', firstname: 'Gontran', lastname: 'Bonheur' }
-];
-
-const PersonRow = ({ key, index }) => {
-    const person = people[index];
-
-    return (
-        <li key={key}>
-            {console.log(index)}
-            {person.firstname} {person.lastname}
-        </li>
-    );
-};
 
 const PersonList = () => {
+    const count = useSelector(state => state.person.count);
+    const people = useSelector(state => state.person.list);
+
+    const personRow = ({ key, index }) => {
+        const person = people[index];
+
+        return (
+            <li key={key}>
+                {person.firstname} {person.lastname}
+            </li>
+        );
+    };
+
     return (
         <>
             <h3>List des personnes</h3>
@@ -27,9 +23,9 @@ const PersonList = () => {
                 {({ width }) => (
                     <List
                         height={100}
-                        rowCount={people.length}
+                        rowCount={count}
                         rowHeight={20}
-                        rowRenderer={PersonRow}
+                        rowRenderer={personRow}
                         width={width}
                     />
                 )}

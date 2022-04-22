@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useDispatch } from 'react-redux';
+import { personAdd } from '../../store/actions/person-action';
 
 const personSchema = yup.object({
     firstname: yup.string().trim().required().min(2),
@@ -8,6 +10,7 @@ const personSchema = yup.object({
 }).required();
 
 const PersonForm = () => {
+    const dispatch = useDispatch();
 
     const { register, handleSubmit, reset, formState: { errors }, setFocus } = useForm({
         resolver: yupResolver(personSchema),
@@ -15,7 +18,7 @@ const PersonForm = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(personAdd(data));
 
         setFocus('firstname');
         reset();
